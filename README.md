@@ -38,7 +38,7 @@ The platform provides:
 - Compute final CB redistribution
 
 ---
-
+```
 ## Architecture (Hexagonal)
 
 ### Backend structure:
