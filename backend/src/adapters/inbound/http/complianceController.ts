@@ -12,15 +12,15 @@ export function complianceController(
       const shipId = String(req.query.shipId || "SHIP-001");
       const year = Number(req.query.year || new Date().getFullYear());
 
-      console.log("📥 /compliance/cb request:", { shipId, year });
+      console.log("/compliance/cb request:", { shipId, year });
 
       const uc = new ComputeCB(complianceRepo);
       const record = await uc.exec(shipId, year);
 
-      console.log("📤 /compliance/cb response:", record);
+      console.log("/compliance/cb response:", record);
       res.json({ cb: record.cb_gco2eq });
     } catch (e) {
-      console.error("❌ ERROR in /cb:", e);
+      console.error("ERROR in /cb:", e);
       next(e);
     }
   });

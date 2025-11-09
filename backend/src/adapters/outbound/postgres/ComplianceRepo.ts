@@ -5,7 +5,7 @@ import { pg } from "./Pg";
 export class ComplianceRepo implements CompliancePort {
 
   async getShipRoutes(shipId: string, year: number) {
-    console.log("🔍 getShipRoutes called with:", { shipId, year });
+    console.log("getShipRoutes called with:", { shipId, year });
 
     const { rows } = await pg.query(
       `SELECT r.*
@@ -15,7 +15,7 @@ export class ComplianceRepo implements CompliancePort {
       [shipId, year]
     );
 
-    console.log("✅ getShipRoutes result:", rows);
+    console.log("getShipRoutes result:", rows);
 
     return rows;
   }
