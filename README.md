@@ -202,6 +202,8 @@ You can reference them directly in Markdown like this:
 ```
 
 Rendered:
+
+
 ![Screenshot 1](./screenshots/Untitled.png)
 ![Screenshot 2](./screenshots/Untitled1.png)
 ![Screenshot 3](./screenshots/Untitled2.png)
