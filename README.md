@@ -63,12 +63,15 @@ backend/
 ### Frontend structure:
 
 ```
-frontend/
-  src/
-    core/
-    adapters/
+src/
+  core/
+    domain/
+    application/
+    ports/
+  adapters/
+    ui/
     infrastructure/
-    shared/
+  shared/
 ```
 
 This ensures domain logic stays independent from UI and database concerns.
@@ -80,7 +83,7 @@ This ensures domain logic stays independent from UI and database concerns.
 ### 1. Clone Repo
 
 ```
-git clone https://github.com/your/repo.git
+git clone https://github.com/Khushis04/varuna-marine.git
 cd varuna-marine
 ```
 
@@ -141,80 +144,69 @@ http://localhost:5173
 
 ---
 
-## Sample API Requests
-
-### Compute CB
-
-```
-GET http://localhost:3000/compliance/cb?shipId=S1&year=2025
-```
-
-### Get Adjusted CB
-
-```
-GET http://localhost:3000/compliance/adjusted-cb?shipId=S1&year=2025
-```
-
-### Bank surplus
-
-```
-POST http://localhost:3000/banking/bank?shipId=S1&year=2025
-```
-
-### Apply banked amount
-
-```
-POST http://localhost:3000/banking/apply?shipId=S1&year=2025
-Content-Type: application/json
-
-{ "amount": 5000 }
-```
-
-### Create a pool
-
-```
-POST http://localhost:3000/pools
-Content-Type: application/json
-
-{
-  "year": 2025,
-  "members": [
-    { "shipId": "S1", "cb_before": 10000 },
-    { "shipId": "S2", "cb_before": -6000 }
-  ]
-}
-```
-
----
-
 ## Testing
 
-Once test files are added:
+You can test the entire FuelEU backend using the included `test.http` file.
+
+### Using VS Code REST Client
+
+1. Install the **REST Client** extension  
+   (`humao.rest-client`)
+2. Open `backend/test.http`
+3. Click **“Send Request”** above any HTTP block
+
+This will execute real calls against your running backend.
+
+### Available Requests in `test.http`
+
+- **Get all routes**
+- **Set baseline**
+- **View ship routes**
+- **Compare routes**
+- **Compute CB**
+- **Get adjusted CB**
+- **Bank surplus**
+- **Apply banked surplus**
+- **View banking history**
+- **Create pool**
+
+Example excerpt from `test.http`:
 
 ```
-npm run test
+### Compute Compliance Balance (CB)
+GET http://localhost:3000/compliance/cb?shipId=S1&year=2025
+Accept: application/json
+
+### Bank surplus CB
+POST http://localhost:3000/banking/bank?shipId=GOOD1&year=2025
+Content-Type: application/json
 ```
 
-Recommended:
-- Vitest / Jest
-- Supertest for HTTP tests
-- Mocks/stubs for ports
-
----
+This approach gives fast manual testing without needing automated tests or Postman.
 
 ## Screenshots
 
-Place images under:
+All screenshots are stored in the `/screenshots` directory.
 
-```
-frontend/public/screenshots/
+You can reference them directly in Markdown like this:
+
+```md
+![Screenshot 1](./screenshots/Untitled1.png)
+![Screenshot 2](./screenshots/Untitled2.png)
+![Screenshot 3](./screenshots/Untitled3.png)
+![Screenshot 4](./screenshots/Untitled4.png)
+![Screenshot 5](./screenshots/Untitled5.png)
+![Screenshot 6](./screenshots/Untitled6.png)
+![Screenshot 6](./screenshots/Untitled7.png)
 ```
 
-Embed like:
+Rendered:
 
-```
-![Routes](./public/screenshots/routes.png)
-```
+![Screenshot 1](./screenshots/Untitled1.png)
+![Screenshot 2](./screenshots/Untitled2.png)
+![Screenshot 3](./screenshots/Untitled3.png)
+![Screenshot 4](./screenshots/Untitled4.png)
+![Screenshot 5](./screenshots/Untitled5.png)
+![Screenshot 6](./screenshots/Untitled6.png)
+![Screenshot 6](./screenshots/Untitled7.png)
 
----
-```
