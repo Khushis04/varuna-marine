@@ -1,7 +1,6 @@
 export type VesselType = 'container' | 'tanker' | 'bulk' | 'ro-ro' | 'passenger'
 export type FuelType = 'HFO' | 'MDO' | 'LNG' | 'Methanol' | 'Ammonia'
 
-
 export interface Route {
   id: number
   routeId: string

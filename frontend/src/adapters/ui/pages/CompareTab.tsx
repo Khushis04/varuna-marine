@@ -13,19 +13,35 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  ReferenceLine
+  ReferenceLine,
 } from 'recharts'
 
+interface ComparisonItem {
+  route: {
+    routeId: string
+    ghgIntensity: number
+  }
+  compliant: boolean
+}
+
+interface ComparisonResponse {
+  baseline: {
+    routeId: string
+    ghgIntensity: number
+  }
+  comparisons: ComparisonItem[]
+}
+
 export default function CompareTab() {
-  const [data, setData] = React.useState<any>(null)
+  const [data, setData] = React.useState<ComparisonResponse | null>(null)
   const [error, setError] = React.useState('')
 
   React.useEffect(() => {
     ;(async () => {
       try {
         setData(await RoutesAPI.getComparison())
-      } catch (e: any) {
-        setError(e.message)
+      } catch (e) {
+        if (e instanceof Error) setError(e.message)
       }
     })()
   }, [])
@@ -37,50 +53,36 @@ export default function CompareTab() {
     {
       name: data.baseline.routeId,
       baseline: data.baseline.ghgIntensity,
-      value: data.baseline.ghgIntensity
+      value: data.baseline.ghgIntensity,
     },
-    ...data.comparisons.map((c: any) => ({
+    ...data.comparisons.map((c) => ({
       name: c.route.routeId,
       baseline: data.baseline.ghgIntensity,
-      value: c.route.ghgIntensity
-    }))
+      value: c.route.ghgIntensity,
+    })),
   ]
 
   return (
     <div className="space-y-6">
-
-      <DataTable
+      <DataTable<ComparisonItem>
         rows={data.comparisons}
         columns={[
-          { key: 'route', label: 'Route', render: (_v, r) => r.route.routeId },
-          {
-            key: 'ghg',
-            label: 'Baseline',
-            render: () => data.baseline.ghgIntensity.toFixed(4)
-          },
-          {
-            key: 'ghg2',
-            label: 'Comparison',
-            render: (_v, r) => r.route.ghgIntensity.toFixed(4)
-          },
+          { key: 'route', label: 'Route', render: (_, r) => r.route.routeId },
+          { key: 'ghg', label: 'Baseline', render: () => data.baseline.ghgIntensity.toFixed(4) },
+          { key: 'ghg2', label: 'Comparison', render: (_, r) => r.route.ghgIntensity.toFixed(4) },
           {
             key: 'diff',
             label: '% Difference',
-            render: (_v, r) =>
-              percentDiff(
-                r.route.ghgIntensity,
-                data.baseline.ghgIntensity
-              ).toFixed(2) + '%'
+            render: (_, r) =>
+              percentDiff(r.route.ghgIntensity, data.baseline.ghgIntensity).toFixed(2) + '%',
           },
           {
             key: 'cmp',
             label: 'Compliant',
-            render: (_v, r) => (
-              <Badge color={r.compliant ? 'green' : 'red'}>
-                {r.compliant ? '✅' : '❌'}
-              </Badge>
-            )
-          }
+            render: (_, r) => (
+              <Badge color={r.compliant ? 'green' : 'red'}>{r.compliant ? 'yes' : 'no'}</Badge>
+            ),
+          },
         ]}
       />
 

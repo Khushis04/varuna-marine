@@ -1,4 +1,4 @@
-import { Route } from '@domain/Route'
+import { Route } from "@domain/Route";
 
 
 export interface RoutesPort {

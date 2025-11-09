@@ -20,7 +20,7 @@ export function buildRouter() {
   const poolRepo = new PoolingRepo();
 
   api.use("/routes", routesController(routesRepo));
-  api.use("/compliance", complianceController(routesRepo, compRepo));
+  api.use("/compliance", complianceController(compRepo));
   api.use("/banking", bankingController(bankRepo));
   api.use("/pools", poolsController(poolRepo));
 

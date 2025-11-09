@@ -3,31 +3,42 @@ import { CBRecord } from "@domain/Compliance";
 import { pg } from "./Pg";
 
 export class ComplianceRepo implements CompliancePort {
-  async computeAndStoreCB(shipId: string, year: number): Promise<CBRecord> {
-    const existing = await this.getCB(shipId, year);
-    if (existing) return existing;
 
-    const rec: CBRecord = { shipId, year, cb_gco2eq: 0 };
+  async getShipRoutes(shipId: string, year: number) {
+    console.log("🔍 getShipRoutes called with:", { shipId, year });
+
     const { rows } = await pg.query(
-      "INSERT INTO ship_compliance (ship_id, year, cb_gco2eq) VALUES ($1,$2,$3) RETURNING id",
-      [shipId, year, 0]
+      `SELECT r.*
+      FROM ship_routes sr
+      JOIN routes r ON r.route_id = sr.route_id
+      WHERE sr.ship_id=$1 AND sr.year=$2`,
+      [shipId, year]
     );
 
-    rec.id = rows[0].id;
-    return rec;
+    console.log("✅ getShipRoutes result:", rows);
+
+    return rows;
+  }
+
+  async saveCB(rec: CBRecord) {
+    await pg.query(
+      `INSERT INTO ship_compliance(ship_id, year, cb_gco2eq)
+       VALUES($1, $2, $3)
+       ON CONFLICT (ship_id, year)
+       DO UPDATE SET cb_gco2eq = EXCLUDED.cb_gco2eq`,
+      [rec.shipId, rec.year, rec.cb_gco2eq]
+    );
   }
 
   async getCB(shipId: string, year: number): Promise<CBRecord | null> {
     const { rows } = await pg.query(
-      "SELECT * FROM ship_compliance WHERE ship_id=$1 AND year=$2 ORDER BY id DESC LIMIT 1",
+      "SELECT * FROM ship_compliance WHERE ship_id=$1 AND year=$2 LIMIT 1",
       [shipId, year]
     );
     if (!rows[0]) return null;
-
     return {
-      id: rows[0].id,
-      shipId: rows[0].ship_id,
-      year: rows[0].year,
+      shipId,
+      year,
       cb_gco2eq: Number(rows[0].cb_gco2eq)
     };
   }
@@ -44,3 +55,4 @@ export class ComplianceRepo implements CompliancePort {
     return cb + Number(rows[0].s || 0);
   }
 }
+

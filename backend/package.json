@@ -4,11 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/infrastructure/server/index.ts",
-    "build": "tsc -p .",
+    "dev": "tsx watch src/infrastructure/server/index.ts",
     "start": "node dist/infrastructure/server/index.js",
-    "migrate": "psql $DATABASE_URL -f src/infrastructure/db/migrations/001_init.sql",
-    "seed": "psql $DATABASE_URL -f src/infrastructure/db/seeds/seed.sql"
+    "build": "tsc -p .",
+    "lint": "eslint . --ext .ts",
+    "lint:fix": "eslint . --ext .ts --fix"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
@@ -18,8 +18,16 @@
   "devDependencies": {
     "@types/express": "^4.17.21",
     "@types/node": "^22.7.4",
+    "@typescript-eslint/eslint-plugin": "^8.46.3",
+    "@typescript-eslint/parser": "^8.46.3",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "globals": "^16.5.0",
+    "prettier": "^3.6.2",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.6.3"
+    "tsx": "^4.20.6",
+    "typescript": "^5.6.3",
+    "typescript-eslint": "^8.46.3"
   }
 }

@@ -1,8 +1,9 @@
-import { CBRecord } from '@domain/Compliance'
-
+import { Route } from "@domain/Route";
+import { CBRecord } from "@domain/Compliance";
 
 export interface CompliancePort {
-  computeAndStoreCB(shipId: string, year: number): Promise<CBRecord>
-  getCB(shipId: string, year: number): Promise<CBRecord | null>
-  getAdjustedCB(shipId: string, year: number): Promise<number>
+  getShipRoutes(shipId: string, year: number): Promise<Route[]>;
+  saveCB(record: CBRecord): Promise<void>;
+  getCB(shipId: string, year: number): Promise<CBRecord | null>;
+  getAdjustedCB(shipId: string, year: number): Promise<number>;
 }

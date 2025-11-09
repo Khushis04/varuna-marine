@@ -1,16 +1,16 @@
-export type VesselType = 'container' | 'tanker' | 'bulk' | 'ro-ro' | 'passenger'
-export type FuelType = 'HFO' | 'MDO' | 'LNG' | 'Methanol' | 'Ammonia'
+export type VesselType = "container" | "tanker" | "bulk" | "ro-ro" | "passenger"
+export type FuelType = "HFO" | "MDO" | "LNG" | "Methanol" | "Ammonia"
 
 
 export interface Route {
   id: number
-  routeId: string
+  route_id: string
   vesselType: VesselType
   fuelType: FuelType
   year: number
-  ghgIntensity: number 
-  fuelConsumption: number 
-  distance: number 
-  totalEmissions: number 
+  ghg_intensity: number 
+  fuel_consumption: number 
+  distance_km: number 
+  total_emissions: number 
   isBaseline?: boolean
 }

@@ -4,8 +4,12 @@ export interface PoolMember {
   cb_after?: number
 }
 
-
 export interface PoolInput {
   year: number
   members: PoolMember[]
+}
+
+export interface PoolResult {
+  members: { shipId: string; cb_after: number }[]
+  sum: number
 }

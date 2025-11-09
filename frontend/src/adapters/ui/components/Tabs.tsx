@@ -1,16 +1,15 @@
 import React from 'react'
 
-
 export const Tabs: React.FC<{
   tabs: { key: string; label: string; content: React.ReactNode }[]
 }> = ({ tabs }) => {
   const [active, setActive] = React.useState(tabs[0].key)
-  const current = tabs.find(t => t.key === active)
+  const current = tabs.find((t) => t.key === active)
 
   return (
     <div>
       <div className="flex gap-2 mb-4">
-        {tabs.map(t => (
+        {tabs.map((t) => (
           <button
             key={t.key}
             onClick={() => setActive(t.key)}
@@ -20,3 +19,10 @@ export const Tabs: React.FC<{
           >
             {t.label}
           </button>
+        ))}
+      </div>
+
+      <div>{current?.content}</div>
+    </div>
+  )
+}

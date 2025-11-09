@@ -1,30 +1,28 @@
 import { Route } from '../domain/Route'
-import { BankKPI } from '../domain/Compliance'
-import { PoolInput } from '../domain/Pooling'
-
+import { PoolInput, PoolResult } from '../domain/Pooling'
+import { BankRecord, BankResponse } from '../domain/Banking'
 
 export interface RoutesPort {
   getRoutes(): Promise<Route[]>
   setBaseline(id: number): Promise<void>
   getComparison(): Promise<{
     baseline: Route
-    comparisons: Array<{ route: Route; percentDiff: number; compliant: boolean }>
+    comparisons: Array<{
+      route: Route
+      percentDiff: number
+      compliant: boolean
+    }>
   }>
 }
-
 
 export interface BankingPort {
   getCB(shipId: string, year: number): Promise<{ cb: number }>
-  bank(): Promise<{ ok: boolean; kpi: BankKPI }>
-  apply(amount: number): Promise<{ ok: boolean; kpi: BankKPI }>
-  getBankRecords(shipId: string, year: number): Promise<Array<{ amount: number; year: number }>>
+  bank(shipId: string, year: number): Promise<BankResponse>
+  apply(shipId: string, year: number, amount: number): Promise<BankResponse>
+  getBankRecords(shipId: string, year: number): Promise<BankRecord[]>
 }
-
 
 export interface PoolingPort {
   getAdjustedCB(shipId: string, year: number): Promise<{ cb: number }>
-  createPool(input: PoolInput): Promise<{
-    members: { shipId: string; cb_after: number }[]
-    sum: number
-  }>
+  createPool(input: PoolInput): Promise<PoolResult>
 }

@@ -7,7 +7,11 @@ export class BankingRepo implements BankingPort {
       "SELECT amount_gco2eq AS amount, year FROM bank_entries WHERE ship_id=$1 AND year=$2 ORDER BY id",
       [shipId, year]
     );
-    return rows.map((r: any) => ({
+    interface BankEntryRow {
+      amount: string;
+      year: number;
+    }
+    return rows.map((r: BankEntryRow) => ({
       amount: Number(r.amount),
       year: r.year
     }));
