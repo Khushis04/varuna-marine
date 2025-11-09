@@ -191,22 +191,23 @@ All screenshots are stored in the `/screenshots` directory.
 You can reference them directly in Markdown like this:
 
 ```md
-![Screenshot 1](./screenshots/Untitled1.png)
-![Screenshot 2](./screenshots/Untitled2.png)
-![Screenshot 3](./screenshots/Untitled3.png)
-![Screenshot 4](./screenshots/Untitled4.png)
-![Screenshot 5](./screenshots/Untitled5.png)
-![Screenshot 6](./screenshots/Untitled6.png)
-![Screenshot 7](./screenshots/Untitled7.png)
+![Screenshot 1](./screenshots/Untitled.png)
+![Screenshot 2](./screenshots/Untitled1.png)
+![Screenshot 3](./screenshots/Untitled2.png)
+![Screenshot 4](./screenshots/Untitled3.png)
+![Screenshot 5](./screenshots/Untitled4.png)
+![Screenshot 6](./screenshots/Untitled5.png)
+![Screenshot 7](./screenshots/Untitled6.png)
+![Screenshot 8](./screenshots/Untitled7.png)
 ```
 
 Rendered:
-
-![Screenshot 1](./screenshots/Untitled1.png)
-![Screenshot 2](./screenshots/Untitled2.png)
-![Screenshot 3](./screenshots/Untitled3.png)
-![Screenshot 4](./screenshots/Untitled4.png)
-![Screenshot 5](./screenshots/Untitled5.png)
-![Screenshot 6](./screenshots/Untitled6.png)
-![Screenshot 7](./screenshots/Untitled7.png)
+![Screenshot 1](./screenshots/Untitled.png)
+![Screenshot 2](./screenshots/Untitled1.png)
+![Screenshot 3](./screenshots/Untitled2.png)
+![Screenshot 4](./screenshots/Untitled3.png)
+![Screenshot 5](./screenshots/Untitled4.png)
+![Screenshot 6](./screenshots/Untitled5.png)
+![Screenshot 7](./screenshots/Untitled6.png)
+![Screenshot 8](./screenshots/Untitled7.png)
 
