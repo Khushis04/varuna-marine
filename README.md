@@ -197,7 +197,7 @@ You can reference them directly in Markdown like this:
 ![Screenshot 4](./screenshots/Untitled4.png)
 ![Screenshot 5](./screenshots/Untitled5.png)
 ![Screenshot 6](./screenshots/Untitled6.png)
-![Screenshot 6](./screenshots/Untitled7.png)
+![Screenshot 7](./screenshots/Untitled7.png)
 ```
 
 Rendered:
@@ -208,5 +208,5 @@ Rendered:
 ![Screenshot 4](./screenshots/Untitled4.png)
 ![Screenshot 5](./screenshots/Untitled5.png)
 ![Screenshot 6](./screenshots/Untitled6.png)
-![Screenshot 6](./screenshots/Untitled7.png)
+![Screenshot 7](./screenshots/Untitled7.png)
 
